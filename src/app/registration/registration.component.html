@@ -1,0 +1,95 @@
+<div class="container">
+    <h3 class="title">Effettua la registrazione!</h3>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                <div *ngIf="name?.errors?.['required']">Inserisci un nome</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="surname">Cognome:</label>
+            <input type="text" class="form-control" id="surname" formControlName="surname">
+            <div *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)">
+                <div *ngIf="surname?.errors?.['required']">Inserisci un cognome</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" formControlName="email">
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <div *ngIf="email?.errors?.['required']">Inserisci una mail</div>
+                <div *ngIf="email?.errors?.['pattern']">La mail inserita è errata</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <div *ngIf="password?.errors?.['pattern']">
+                    La password inserita non rispetta una delle seguenti condizioni:
+                    <ol>
+                        <li>Almeno un carattere maiuscolo</li>
+                        <li>Almeno un carattere minuscolo</li>
+                        <li>Almeno 8 caratteri</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="number">Telefono:</label>
+            <input type="text" class="form-control" id="number" formControlName="number">
+            <div *ngIf="number?.invalid && (number?.dirty || number?.touched)">
+                <div *ngIf="number?.errors?.['pattern']">Il numero inserito non è valido</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="calendar">Inserisci data di assunzione:</label>
+            <p-calendar
+                id="calendar"
+                formControlName="date" 
+                [iconDisplay]="'input'" 
+                [showIcon]="true" 
+                inputId="icondisplay"
+                dateFormat="dd/mm/yy"
+                [maxDate]="today"
+            />
+        </div>
+        
+        <div class="form-group">
+            <label for="job-select">Seleziona una professione:</label>
+            <select id="job-select" formControlName="job">
+                <option value="" disabled selected>Scegli una professione</option>
+                <option *ngFor = "let item of jobs" [value] = "item.job_id">{{ item.job_title }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="manager-select">Seleziona il tuo manager:</label>
+            <select id="manager-select" formControlName="manager">
+                <option value="" disabled selected>Scegli un manager</option>
+                <option *ngFor = "let item of managers" [value] = "item.employee_id">{{ item.first_name + " " + item.last_name }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="department-select">Seleziona il tuo dipartimento:</label>
+            <select id="department-select" formControlName="department">
+                <option value="" disabled selected>Scegli un dipartimento</option>
+                <option *ngFor = "let item of departments" [value] = "item.department_id">{{ item.department_name }}</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Registrati</button>
+    </form>
+
+    <div class="registrationSuccessful" *ngIf="isUserRegistrated"><h3>{{registratedUser}}!</h3></div>
+    <h3 class="login">Sei già registrato? Effettua il <a [routerLink] = "'/login'">login</a></h3>
+</div>

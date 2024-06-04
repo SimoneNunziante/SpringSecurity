@@ -1,0 +1,37 @@
+<div class="container">
+    <button (click)="logoutUser()">Logout</button>
+    <button (click)="getColleagues()">Collegues</button>
+    
+  
+  
+    <table class="table" *ngIf="isDepartmentEmplListVisible">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Subordinati</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of employees; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ item.first_name }}</td>
+                <td>{{ item.last_name }}</td>
+                <td>{{ item.email }}</td>
+                <td>
+                    <ul *ngIf="item.subordinates && item.subordinates.length > 0">
+                    <li *ngFor="let subordinate of item.subordinates">
+                        {{ subordinate.first_name }} {{ subordinate.last_name }}
+                    </li>
+                    </ul>
+                    <span *ngIf="!item.subordinates || item.subordinates.length === 0">Nessun subordinato</span>
+                </td>
+                <td><button (click)="deleteUser(item.employee_id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+  

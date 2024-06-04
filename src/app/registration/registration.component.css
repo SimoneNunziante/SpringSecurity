@@ -1,0 +1,50 @@
+.container{
+    margin-top: 3%;
+}
+
+.title{
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.form-group {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group>label{
+    margin-top: 1%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.registrationSuccessful{
+    border-radius: 0.375em;
+    border: 2px solid green;
+    background-color: rgba(0, 128, 0, 0.5);
+}
+
+.registrationSuccessful>h3{
+    color: white;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 0;
+}
+
+.login{
+    margin-top: 2%;
+}
+
+::ng-deep #calendar .p-calendar {
+    min-width: 37% !important;
+    max-width: none !important;
+}
+
+  

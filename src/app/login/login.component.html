@@ -1,0 +1,38 @@
+<div class="container">
+    <h3>Effettua il Login!</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" formControlName="email">
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                <div *ngIf="email?.errors?.['pattern']">La mail inserita è errata</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <div *ngIf="password?.errors?.['pattern']">
+                    La password inserita non rispetta una delle seguenti condizioni:
+                    <ol>
+                        <li>Almeno un carattere maiuscolo</li>
+                        <li>Almeno un carattere minuscolo</li>
+                        <li>Almeno 8 caratteri</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+    <div *ngIf="!isResponseVisible">
+        <h5>Non sei registrato?</h5>
+        <a [routerLink]="'/register'">Clicca qui</a> per registrarti!
+    </div>
+
+    <div class="responseDiv" *ngIf="isResponseVisible" [ngClass]="{'success-class': isRequestSuccessful, 'error-class': !isRequestSuccessful}">
+        <h3 class="responseMessage">{{responseMessage}}</h3>
+    </div>
+</div>
